@@ -114,6 +114,7 @@ fn main() {
 Type equality is pretty straightforward. The [`SameTypeAs`] trait has a blanket implementation using the same generic parameter. The basic principle looks like this when simplified:
 
 ```rust
+pub trait Same<T> {}
 impl<T> Same<T> for T {}
 ```
 
@@ -124,6 +125,8 @@ This was inspired by numerous comments floating around on the web.
 Type inequality uses [`negative_impls`](doc.rust-lang.org/beta/unstable-book/language-features/negative-impls.html) and [`auto_traits`](doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html). A naive implementation would be like the following:
 
 ```rust
+#![feature(negative_impls)]
+#![feature(auto_traits)]
 pub auto trait DifferentNaive {}
 impl<T> !DifferentNaive for (T, T) {}
 ```
