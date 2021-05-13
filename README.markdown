@@ -94,7 +94,6 @@ where
 }
 
 fn main() {
-    println!("Hello");
     // Prints "Pair of same type."
     MyPair(1_i32, 2_i32).process();
 
