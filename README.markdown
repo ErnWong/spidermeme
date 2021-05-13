@@ -130,7 +130,7 @@ pub auto trait DifferentNaive {}
 impl<T> !DifferentNaive for (T, T) {}
 ```
 
-However, this will give false positives, as the auto trait will not be implemented for types that contain `(T, T)`. For example, the naive implementation will fail the following:
+However, this will give false negatives, as the auto trait will not be implemented for types that contain `(T, T)`. For example, the naive implementation will fail in the following example because `((i32, i32), (f64, f64))` contains `(i32, i32)` and `(f64, f64)`, both of which implement the `DifferentNaive` trait:
 
 ```rust,compile_fail
 use static_assertions::assert_impl_all;
