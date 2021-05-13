@@ -40,17 +40,17 @@
   <hr>
 </div>
 
-# Provided traits
+## Provided traits
 
-## `spidermeme::SameTypeAs<T>`
+### `spidermeme::SameTypeAs<T>`
 
 An automatically implemented marker trait to check if two types are equal.
 
-## `spidermeme::NotSameTypeAs<T>`
+### `spidermeme::NotSameTypeAs<T>`
 
 An automatically implemented marker trait to check if two types aren't equal.
 
-# Examples
+## Examples
 
 ```rust
 use spidermeme::{SameTypeAs, NotSameTypeAs};
@@ -109,7 +109,7 @@ fn main() {
 }
 ```
 
-# How type equality works
+## How type equality works
 
 Type equality is pretty straightforward. The [`SameTypeAs`] trait has a blanket implementation using the same generic parameter. The basic principle looks like this when simplified:
 
@@ -119,7 +119,7 @@ impl<T> Same<T> for T {}
 
 This was inspired by numerous comments floating around on the web.
 
-# How type inequality works
+## How type inequality works
 
 Type inequality uses [`negative_impls`](doc.rust-lang.org/beta/unstable-book/language-features/negative-impls.html) and [`auto_traits`](doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html). A naive implementation would be like the following:
 
@@ -137,7 +137,7 @@ assert_impl_all!(((i32, i32), (f64, f64)): DifferentNaive);
 
 This crate works around this by using a private named tuple instead of the primitive tuple, so that it is guaranteed that downstream crates will not test types that contain this named tuple.
 
-# Known problems / quirks
+## Known problems / quirks
 
 1. Using both [`SameTypeAs`] and [`NotSameTypeAs`] to implement two impls for the same type will give: `error[E0119]: conflicting implementations`, probably due to the current limitations of Rust(?).
 
@@ -145,7 +145,7 @@ This crate works around this by using a private named tuple instead of the primi
 
 3. For type equality in serious projects, you should probably try some [other crates](crates.io/search?q=type%20equal) by people who probably know better type theory and rust's type system.
 
-# Unstable features
+## Unstable features
 
 ```rust
 #![feature(negative_impls)]
